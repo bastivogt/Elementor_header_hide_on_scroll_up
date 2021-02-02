@@ -1,0 +1,44 @@
+<script>
+/**
+* Header id headerDesk und headerMob geben
+* Header sticky machen
+* HTML Elemet hinzufügen und Script reinkopieren
+*/
+
+function makeHeaderSexy(win, headerID, pos) {
+    var myWin = win;
+    var myPos = myWin.scrollTop();
+    myWin.scroll(function() {
+        console.log(myPos);
+        if(myPos > pos) {
+            if(myWin.scrollTop() > myPos) {
+                console.log("add");
+                console.log(headerID)
+                headerID.addClass('headerup');
+            }else {
+                console.log("remove");
+                headerID.removeClass('headerup');
+            }         
+        }
+        myPos = myWin.scrollTop();
+    });
+}
+document.addEventListener('DOMContentLoaded', function() {
+    jQuery(function($){
+
+        makeHeaderSexy($(window), $('#headerDesk'), 40);
+        makeHeaderSexy($(window), $('#headerMob'), 40);
+    }); 
+});
+</script>
+
+<style>
+    #headerDesk, #headerMob {
+        -webkit-transition: transform 0.34s ease;
+        transition : transform 0.34s ease;
+    }
+    .headerup{
+        transform: translateY(-200px); /*adjust this value to the height of your header*/
+    }
+</style>
+
